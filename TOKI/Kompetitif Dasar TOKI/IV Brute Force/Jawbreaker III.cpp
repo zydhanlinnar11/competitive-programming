@@ -4,26 +4,18 @@ using namespace std;
 
 short movex[] = {0, 0, 1, -1}, movey[] = {1, -1, 0, 0}, bola[25][25], m, n, xmax, ymax, runtuh[25] = {0};
 int nilai, maks;
-bool visited[25][25] = {0};
+bool visited[25][25] = {0}, mark;
 
 void count(short x, short y, short ball) {
-    if((bola[x][y] != ball) || visited[x][y] || (y < 0) || (x < 0) || (y >= 25) || (x >= 25)) return;
+    if((bola[x][y] != ball) || ((mark) ? false : visited[x][y]) || (y < 0) || (x < 0) || (y >= 25) || (x >= 25)) return;
     else {
-        nilai++;
-        visited[x][y] = true;
+        if(mark) bola[x][y] = -1;
+        else {
+            visited[x][y] = true;
+            nilai++;
+        }
         for(int i=0; i < (sizeof(movex) / sizeof(short)); i++) {
             count(x + movex[i], y + movey[i], ball);
-        }
-    }
-}
-
-
-void countandmark(short x, short y, short ball) {
-    if((bola[x][y] != ball) || (y < 0) || (x < 0) || (y >= 25) || (x >= 25)) return;
-    else {
-        bola[x][y] = -1;
-        for(int i=0; i < (sizeof(movex) / sizeof(short)); i++) {
-            countandmark(x + movex[i], y + movey[i], ball);
         }
     }
 }
@@ -35,6 +27,7 @@ int main() {
         for(int j=0; j<n; j++)
             cin>>bola[i][j];
     }
+    mark = false;
     for(int i=0; i<m; i++) {
         for(int j=0; j<n; j++) {
             if(!visited[i][j]) {
@@ -49,7 +42,8 @@ int main() {
         }
     }
     memset(runtuh, 0, 25);
-    countandmark(xmax, ymax, bola[xmax][ymax]);
+    mark = true;
+    count(xmax, ymax, bola[xmax][ymax]);
     for(int i = 0; i < n; i++) {
         int marked = 0, indexy = 0;
         for(int j = 0; j < m; j++) {
