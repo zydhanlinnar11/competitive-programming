@@ -61,8 +61,6 @@ bool kiribawah() {
 };
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     cin>>xa>>ya;
     for(unsigned short i=0; i<xa; i++) {
         for(unsigned short j=0; j<ya; j++) {

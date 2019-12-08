@@ -1,10 +1,8 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     short n,k;
     bool height[100001] = {0};
     cin>>n>>k;

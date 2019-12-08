@@ -31,8 +31,6 @@ bool valid(us a, us b) {
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     us t;
     cin>>t;
     while(t--) {

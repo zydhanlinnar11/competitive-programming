@@ -1,10 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
+#include <limits.h>
 
 using namespace std;
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     int n,x;
     int diff[1000];
     cin>>n>>x;

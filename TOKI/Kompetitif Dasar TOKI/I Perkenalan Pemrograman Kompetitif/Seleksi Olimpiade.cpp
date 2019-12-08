@@ -16,7 +16,7 @@ void swap(peserta &a, peserta &b) {
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie();
     us t;
     cin>>t;
     for(us i=0; i<t; i++) {

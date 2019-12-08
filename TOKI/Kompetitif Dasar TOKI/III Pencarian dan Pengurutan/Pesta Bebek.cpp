@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstring>
 
 using namespace std;
 char Name[1000][11];
@@ -8,8 +9,6 @@ unsigned short getPos(char *, unsigned short);
 void swap(char*, char*);
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     cin>>n;
     for(unsigned short i = 0; i<n; i++) {
         char temp[11];

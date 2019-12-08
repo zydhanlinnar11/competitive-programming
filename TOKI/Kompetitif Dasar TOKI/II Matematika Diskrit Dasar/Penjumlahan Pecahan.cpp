@@ -8,8 +8,6 @@ ull fpb(ull a, ull b) {
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     ull a, b, c, d, gcd, e, f;
     cin>>a>>b;
     cin>>c>>d;
