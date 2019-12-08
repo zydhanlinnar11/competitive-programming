@@ -1,6 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,6 +8,8 @@ unsigned int n;
 float median();
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     cin>>n;
     for(unsigned int i=0; i<n; i++) {
         cin>>quality[i];

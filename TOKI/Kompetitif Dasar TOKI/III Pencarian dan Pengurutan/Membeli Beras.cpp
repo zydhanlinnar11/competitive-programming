@@ -1,5 +1,4 @@
-#include <iostream>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 struct beras {
     unsigned short w;
@@ -9,9 +8,7 @@ struct beras {
 
 typedef beras Beras;
 
-using std::cout;
-using std::cin;
-using std::endl;
+using namespace std;
 
 Beras B[1000];
 Beras BSorted[1000];
@@ -19,6 +16,8 @@ Beras BSorted[1000];
 void insertionSort(unsigned short);
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     unsigned short n;
     unsigned int x;
     cin>>n>>x;

@@ -1,12 +1,12 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
-using std::cout;
-using std::cin;
-using std::endl;
+using namespace std;
 
 unsigned short petak[100][100];
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     unsigned short n,m;
     unsigned int k;
     cin>>n>>m>>k;

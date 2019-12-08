@@ -1,5 +1,4 @@
-#include <iostream>
-#include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -15,6 +14,8 @@ unsigned int n;
 void searchPhonebook(char *);
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     unsigned int q;
     cin>>n>>q;
     for(unsigned int i=1; i<=n; i++) {

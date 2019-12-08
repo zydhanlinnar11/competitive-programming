@@ -1,5 +1,4 @@
-#include <iostream>
-#include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,6 +9,8 @@ void insertandsort(const char*, unsigned short);
 void swap(char*, char*);
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     cin>>n;
     for(unsigned short i = 0; i<n; i++) {
         char tmp[11];

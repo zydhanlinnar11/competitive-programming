@@ -21,6 +21,8 @@ void count(short x, short y, short ball) {
 }
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     maks = -1;
     cin>>m>>n;
     for(int i=0; i<m; i++) {

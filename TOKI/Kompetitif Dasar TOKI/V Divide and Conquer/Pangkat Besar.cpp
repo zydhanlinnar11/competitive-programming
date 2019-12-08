@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
 #define mod 1000000
 
 using namespace std;
