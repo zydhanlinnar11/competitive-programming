@@ -50,6 +50,7 @@ int step2(short bola[25][25]) {
             if(visited[i][j] || ball[i][j] == -1) continue;
             nilai = 0;
             count(i, j, ball[i][j], ball, visited, false);
+            if(nilai == 1) continue;
             max = (nilai > max) ? nilai : max;
         }
     }
@@ -72,6 +73,7 @@ int main() {
             nilai = 0;
             copyball(ball, bola);
             count(i, j, ball[i][j], ball, visited, true);
+            if(nilai == 1) continue;
             runtuh(ball);
             int tmp = nilai * (nilai - 1);
             int nilai2 = step2(ball);
