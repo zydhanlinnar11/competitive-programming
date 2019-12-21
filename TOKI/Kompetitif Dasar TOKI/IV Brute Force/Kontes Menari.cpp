@@ -38,49 +38,6 @@ int binsearch(int left, int right, int n) {
     else return binsearch(mid, right, n);
 }
 
-void merge(int aleft, int aright, int bleft, int bright) {
-    int Lsize = aright - aleft + 1;
-    int Rsize = bright - bleft + 1;
-    int *L = new int[Lsize];
-    int *R = new int[Rsize];
-    for(int i=0; i<Lsize; i++)
-        L[i] = ksum[aleft + i];
-    for(int i=0; i<Rsize; i++)
-        R[i] = ksum[bleft + i];
-    
-    int aIndex = 0, bIndex = 0, tIndex = aleft;
-    while(aIndex < Lsize && bIndex < Rsize) {
-        if(L[aIndex] <= R[bIndex]) {
-            ksum[tIndex] = L[aIndex];
-            aIndex++;
-        } else {
-            ksum[tIndex] = R[bIndex];
-            bIndex++;
-        }
-        tIndex++;
-    }
-    while(aIndex < Lsize) {
-        ksum[tIndex] = L[aIndex];
-        aIndex++;
-        tIndex++;
-    }
-    while(bIndex < Rsize) {
-        ksum[tIndex] = R[bIndex];
-        bIndex++;
-        tIndex++;
-    }
-    delete L;
-    delete R;
-}
-
-void mergesort(int left, int right) {
-    if(left == right) return;
-    int aright = left + ((right - left) >> 1);
-    mergesort(left, aright);
-    mergesort(aright + 1, right);
-    merge(left, aright, aright + 1, right);
-}
-
 int main() {
     int j, h;
     scanf("%*s %*d");
@@ -93,7 +50,7 @@ int main() {
         compute(1, bebek[i].d, i, bebek[i].t, bebek[i].t == 'Y');
         pernah[i] = false;
     }
-    mergesort(0, indx - 1);
+    sort(ksum, ksum + indx);
     for(int i=0; i<j; i++) {
         cin>>h;
         if(h > ksum[indx - 1]) {
