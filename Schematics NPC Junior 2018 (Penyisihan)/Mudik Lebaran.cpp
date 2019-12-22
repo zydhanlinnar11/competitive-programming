@@ -32,8 +32,9 @@ int main() {
         bool oke = false;
         for(int j=0; j<n; j++) {
             cin>>a;
+            if(oke) continue;
             ull hasil = getHadap(a);
-            if(isPrime(hasil) && !oke) {
+            if(isPrime(hasil)) {
                 cout<<hasil<<" "<<getType(hasil)<<'\n';
                 oke = true;
             }
