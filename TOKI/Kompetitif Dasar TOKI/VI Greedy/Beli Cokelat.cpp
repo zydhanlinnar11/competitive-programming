@@ -2,8 +2,8 @@
 using namespace std;
 typedef struct coklat {
     unsigned long long h, b;
+    bool operator < (const coklat &a) const { return h < a.h; };
 }cc;
-bool compVal(cc a, cc b) { return a.h < b.h; }
 
 int main() {
     cc arr[100000];
@@ -11,7 +11,7 @@ int main() {
     cin>>n>>d;
     for(int i=0; i < n; i++)
         cin>>arr[i].h>>arr[i].b;
-    sort(arr, arr + n, compVal);
+    sort(arr, arr + n);
     for(int i=0; i < n; i++) {
         unsigned long long bought = (arr[i].b * arr[i].h <= d) ? arr[i].b : (d / arr[i].h);
         d -= (bought * arr[i].h);

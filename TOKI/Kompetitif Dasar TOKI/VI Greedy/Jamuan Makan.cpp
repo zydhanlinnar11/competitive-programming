@@ -2,8 +2,8 @@
 using namespace std;
 typedef struct friends {
     int start, endtime;
+    bool operator < (const teman &a) const { return endtime < a.endtime; };
 }teman;
-bool compareEnd(teman a, teman b) { return (a.endtime < b.endtime); }
 
 int main() {
     teman a[100000];
@@ -13,7 +13,7 @@ int main() {
         cin>>a[i].start>>a[i].endtime;
         a[i].endtime += a[i].start - 1;
     }
-    sort(a, a + n, compareEnd);
+    sort(a, a + n);
     for(int i=0; i < n; i++) {
         if(a[i].start > start) {
             invited++;
