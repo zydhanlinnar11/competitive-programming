@@ -1,25 +1,24 @@
 #include <iostream>
-
-using std::cout;
-using std::cin;
-using std::endl;
-
-unsigned short petak[100][100];
+using namespace std;
+int petak[100][100];
 
 int main() {
-    unsigned short n,m;
-    unsigned int k;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n,m;
+    int k;
     cin>>n>>m>>k;
-    for(unsigned short i=0; i<n; i++) {
-        for(unsigned short j=0; j<m; j++){
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++){
             cin>>petak[i][j];
         }
     }
     bool menarik=false;
-    unsigned short i, j;
+    int i, j;
     for(j=0; j<m; j++) {
         for(i=0; i<n; i++){
-            unsigned int kemenarikan;
+            int kemenarikan;
+            // Mencari kemenarikan sesuai ketentuan soal
             if(m==1 && n==1) {
                 kemenarikan=0;
             } else if(m==1) {

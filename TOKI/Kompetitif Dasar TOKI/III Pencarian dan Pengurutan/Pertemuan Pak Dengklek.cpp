@@ -1,46 +1,26 @@
-#include <iostream>
-#include <cstring>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-unsigned short n;
-char nama[500][11];
-
-void insertandsort(const char*, unsigned short);
-void swap(char*, char*);
+bool compare(string &a, string &b) {
+    if(a.length() == b.length())
+        return a < b;
+    return a.length() < b.length();
+}
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    vector<string> arr;
+    int n;
     cin>>n;
-    for(unsigned short i = 0; i<n; i++) {
-        char tmp[11];
+    for(int i=0; i<n; i++) {
+        string tmp;
         cin>>tmp;
-        insertandsort(tmp, i);
+        arr.push_back(tmp);
     }
-    for(unsigned short i = 0; i<n; i++) {
-        cout<<nama[i]<<endl;
-    }
-}
-
-void insertandsort(const char* tmp, unsigned short n) {
-    unsigned short i = n;
-    strcpy(nama[i], tmp);
-    if(i!=0) {
-        while (strlen(nama[i-1])>strlen(nama[i]) && i>0) {
-            swap(nama[i-1], nama[i]);
-            i--;
-        }
-        while (strcmp(nama[i-1], nama[i])>0 && i>0) {
-            if(strlen(nama[i-1])==strlen(nama[i])) {
-                swap(nama[i-1], nama[i]);
-                i--;
-            } else break;
-        }
-    }
-}
-
-void swap(char * str1, char* str2) {
-    char tmp[11];
-    strcpy(tmp, str1);
-    strcpy(str1, str2);
-    strcpy(str2, tmp);
+    // Sort sesuai ketentuan soal
+    sort(arr.begin(), arr.end(), compare);
+    for(auto i : arr)
+        cout<<i<<'\n';
+    return 0;
 }

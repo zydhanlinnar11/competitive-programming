@@ -1,27 +1,16 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    short n,k;
-    bool height[100001] = {0};
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n, k;
     cin>>n>>k;
-    for(int i=1; i<=n; i++) {
-        int arrayIndex;
-        cin>>arrayIndex;
-        height[arrayIndex] = 1;
-    }
-    short count = 0;
-    int arrayIndex;
-    for(int i=1; i<=100000; i++) {
-        if(height[i] == 1) {
-            count++;
-        } else continue;
-        if(count==k) {
-            arrayIndex = i;
-            break;
-        }
-    }
-    cout<<arrayIndex<<endl;
+    int arr[n];
+    for(int &i : arr)
+        cin>>i;
+    // Data diurutkan dari yang terkecil, lalu ambil index yang bersangkutan
+    sort(arr, arr + n);
+    cout<<arr[k - 1]<<'\n';
     return 0;
 }

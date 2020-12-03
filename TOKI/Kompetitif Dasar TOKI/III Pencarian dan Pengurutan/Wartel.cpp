@@ -1,46 +1,26 @@
-#include <iostream>
-#include <cstring>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-struct phonebook {
-    char name[11];
-    char num[7];
-};
-
-typedef struct phonebook Phonebook;
-Phonebook PB[100001];
-unsigned int n;
-
-void searchPhonebook(char *);
-
 int main() {
-    unsigned int q;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n, q;
+    // Hanya perlu insert ke map lalu mencarinya
+    map<string, string> mp;
     cin>>n>>q;
-    for(unsigned int i=1; i<=n; i++) {
-        cin>>PB[i].name>>PB[i].num;
+    for(int i=1; i<=n; i++) {
+        string nama, nom;
+        cin>>nama>>nom;
+        mp.insert(make_pair(nama, nom));
     }
 
-    for(unsigned int i=1; i<=q; i++) {
-        char search[11];
-        cin>>search;
-        searchPhonebook(search);
+    for(int i=1; i<=q; i++) {
+        string cari;
+        cin>>cari;
+        auto j = mp.find(cari);
+        if(j == mp.end())
+            cout<<"NIHIL\n";
+        else cout<<j->second<<'\n';
     }
     return 0;
-}
-
-void searchPhonebook(char search[]) {
-    unsigned int kiri = 1, kanan = n;
-    char num[7] = "NIHIL";
-    while(kiri<=kanan && (strcmp(num, "NIHIL") == 0)) {
-        unsigned int tengah = (kanan+kiri)/2;
-        if(strcmp(search, PB[tengah].name) > 0) {
-            kiri = tengah+1;
-        } else if (strcmp(search, PB[tengah].name) < 0) {
-            kanan = tengah-1;
-        } else {
-            strcpy(num, PB[tengah].num);
-        }
-    }
-    cout<<num<<endl;
 }

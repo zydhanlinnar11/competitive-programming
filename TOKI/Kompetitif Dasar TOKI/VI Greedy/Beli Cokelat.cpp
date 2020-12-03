@@ -1,22 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef struct coklat {
-    unsigned long long h, b;
-    bool operator < (const coklat &a) const { return h < a.h; };
-}cc;
+typedef unsigned long long ull;
 
 int main() {
-    cc arr[100000];
-    unsigned long long d, total = 0, n;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    unsigned n;
+    ull d, terbeli = 0;
     cin>>n>>d;
-    for(int i=0; i < n; i++)
-        cin>>arr[i].h>>arr[i].b;
-    sort(arr, arr + n);
-    for(int i=0; i < n; i++) {
-        unsigned long long bought = (arr[i].b * arr[i].h <= d) ? arr[i].b : (d / arr[i].h);
-        d -= (bought * arr[i].h);
-        total += bought;
+    pair<ull, ull> daftar[n]; // list coklat dan bebek
+    for(auto &i : daftar)
+        cin>>i.first>>i.second;
+    sort(daftar, daftar + n);
+    for(auto i : daftar) {
+        if(d == 0 || d < i.first)
+            break;
+        ull belibrp = min(i.second, d / i.first);
+        terbeli += belibrp; // beli sebutuhnya/semampunya
+        d -= i.first * belibrp;
     }
-    cout<<total<<'\n';
+    cout<<terbeli<<'\n';
     return 0;
 }

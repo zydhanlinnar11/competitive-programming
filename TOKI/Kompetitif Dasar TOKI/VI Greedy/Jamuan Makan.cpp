@@ -1,25 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef struct friends {
-    int start, endtime;
-    bool operator < (const teman &a) const { return endtime < a.endtime; };
-}teman;
 
 int main() {
-    teman a[100000];
-    int n, start = 0, invited = 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n, dijamu = 0, terakhirselesai = 0;
     cin>>n;
-    for(int i=0; i<n; i++) {
-        cin>>a[i].start>>a[i].endtime;
-        a[i].endtime += a[i].start - 1;
-    }
-    sort(a, a + n);
-    for(int i=0; i < n; i++) {
-        if(a[i].start > start) {
-            invited++;
-            start = a[i].endtime;
-        }
-    }
-    cout<<invited<<'\n';
+    pair<int, int> tamu[n]; // Daftar teman atau tamu
+    for(auto &i : tamu)
+        cin>>i.second>>i.first, i.first += i.second;
+    sort(tamu, tamu + n);
+    for(auto i : tamu)
+        if(terakhirselesai <= i.second) // Yang terakhir selesai kurang dari waktu kunjungan tamu berikutnya
+            terakhirselesai = i.first, dijamu++;
+    cout<<dijamu<<'\n';
     return 0;
 }
