@@ -25,7 +25,11 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, k;
+    cin>>n>>k;
+    if (n % 4 == 0) cout<<n / 4<<" "<<n / 4<<" "<<n / 2<<"\n";
+    else if (n % 2 == 0) cout<<2<<" "<<(n / 2) - 1<<" "<<(n / 2) - 1<<"\n";
+    else cout<<1<<" "<<(n / 2)<<" "<<(n / 2)<<"\n";
 }
 
 int main() {

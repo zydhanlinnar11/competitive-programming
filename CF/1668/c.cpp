@@ -25,7 +25,30 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    vll arr(n);
+    for(ll &i: arr) cin>>i;
+    ll ans = INT64_MAX;
 
+    for(ll i=0; i<n; i++) {
+        ll loc = 0;
+        vll res(n, 0);
+        for(ll j=i - 1; j>=0; j--) {
+            ll cnt = (res[j + 1] / arr[j]) + 1;
+            res[j] = cnt * arr[j];
+            loc += cnt;
+        }
+        for(ll j=i + 1; j<n; j++) {
+            ll cnt = (res[j - 1] / arr[j]) + 1;
+            res[j] = cnt * arr[j];
+            loc += cnt;
+        }
+        // for(ll j: res) cout<<j<<" ";
+        // cout<<"\n";
+        ans = min(ans, loc);
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,11 +56,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1668/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1668/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

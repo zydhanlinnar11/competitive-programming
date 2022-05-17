@@ -25,6 +25,38 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    vi arr(n);
+    ll ls = 0, rs = 0;
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
+
+    int ans = 0;
+    int l = 0, r = n - 1;
+    int el = 0, er = 0;
+    while(l <= r) {
+        if(ls < rs) {
+            ls += arr[l++];
+            el++;
+        } else if(ls > rs) {
+            rs += arr[r--];
+            er++;
+        }
+
+        if(ls == rs) {
+            ans = er + el;
+            ls += arr[l++];
+            rs += arr[r--];
+            er++;
+            el++;
+        }
+    }
+
+    if(el + er <= n && ls == rs) ans = el + er;
+
+    cout<<ans<<"\n";
 
 }
 
@@ -33,8 +65,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

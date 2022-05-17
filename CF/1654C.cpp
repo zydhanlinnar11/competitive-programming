@@ -25,7 +25,35 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    priority_queue<ll> pq;
+    vll arr(n);
+    ll sum = 0;
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+        sum += arr[i];
+    }
+    sort(arr.begin(), arr.end());
+    pq.push(sum);
+    int i = n - 1;
+    int cnt = 0;
+    while(i >= 0 && pq.size()) {
+        ll lgint = pq.top();
+        pq.pop();
+        if(lgint == arr[i]) {
+            i--;
+            continue;
+        }
+        if(lgint == 1 || cnt == n - 1) break;
 
+        pq.push((lgint >> 1));
+        pq.push((lgint >> 1) + (lgint & 1 ? 1 : 0));
+        cnt++;
+    }
+    if(i > -1)
+        cout<<"NO\n";
+    else cout<<"YES\n";
 }
 
 int main() {

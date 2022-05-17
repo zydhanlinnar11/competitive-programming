@@ -25,7 +25,12 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n;
+    cin>>n;
+    if(n>=1900) cout<<"Division 1\n";
+    else if(n>=1600) cout<<"Division 2\n";
+    else if(n>=1400) cout<<"Division 3\n";
+    else cout<<"Division 4\n";
 }
 
 int main() {
@@ -33,8 +38,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

@@ -25,7 +25,38 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    vs arr(2);
+    cin>>arr[0]>>arr[1];
+    vi cnt(2);
+    vi2d dp(2, vi(2));
+    dp[0][0] = dp[1][0] = INT_MAX;
+    dp[0][1] = dp[1][1] = INT_MIN;
+    for(int i=0; i<2; i++)
+        for(int j=0; j<n; j++) {
+            cnt[i] += arr[i][j] == '*';
+            if(arr[i][j] == '.') continue;
+            dp[i][0] = min(dp[i][0], j); 
+            dp[i][1] = max(dp[i][1], j); 
+        }
 
+    int ans = INT_MAX;
+    for(int i=0; i<2; i++) {
+        for(int j=0; j<n; j++) {
+            int sc = 0;
+            int lwn = i == 0 ? 1 : 0;
+            if(dp[i][0] < j) sc += j - dp[i][0];
+            if(dp[i][1] > j) sc += dp[i][1] - j;
+            if(dp[lwn][0] < j) sc += j - dp[lwn][0] + 1;
+            if(dp[lwn][1] > j) sc += dp[lwn][1] - j + 1;
+            if(dp[lwn][0] < j && dp[lwn][1] > j) sc--;
+            ans = min(ans, sc);
+            if(ans == 1)
+                return;
+        }
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +64,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1680/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1680/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

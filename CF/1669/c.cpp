@@ -25,7 +25,20 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    vi arr(n);
+    for(int i=0; i<n; i++) cin>>arr[i];
 
+    bool aSame = true, bSame = true;
+    for(int i=0; i<n; i+=2) {
+        aSame &= (arr[0] % 2 == 0) == (arr[i] % 2 == 0);
+    }
+    for(int i=1; i<n; i+=2) {
+        aSame &= (arr[1] % 2 == 0) == (arr[i] % 2 == 0);
+    }
+    if(aSame && bSame) cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() {
@@ -33,8 +46,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

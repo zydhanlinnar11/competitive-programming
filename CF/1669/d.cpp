@@ -25,7 +25,28 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
 
+    string tmp = "";
+
+    for(int i=0; i<=n; i++) {
+        if (i == n || s[i] == 'W') {
+            if(tmp.empty()) continue;
+            auto mn = *min_element(tmp.begin(), tmp.end());
+            auto mx = *max_element(tmp.begin(), tmp.end());
+            if(mn == mx) {
+                cout<<"NO\n";
+                return;
+            }
+            tmp = "";
+            continue;
+        }
+        tmp += s[i];
+    }
+    cout<<"YES\n";
 }
 
 int main() {
@@ -33,8 +54,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

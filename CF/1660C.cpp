@@ -25,7 +25,18 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    string s;
+    cin>>s;
+    int m = 0;
+    int n = s.length();
+    vector<bool> arr(26, false);
+    for(char i: s) {
+        if(arr[i - 'a']) {
+            fill(arr.begin(), arr.end(), false);
+            m += 2;
+        } else arr[i - 'a'] = true;
+    }
+    cout<<n - m<<"\n";
 }
 
 int main() {

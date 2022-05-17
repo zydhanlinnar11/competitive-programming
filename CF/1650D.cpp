@@ -24,8 +24,33 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+void swap (int &a, int &b) {
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
 
+inline void prog() {
+    int n;
+    cin>>n;
+    vi arr(n), ans(n);
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+        arr[i]--;
+    }
+    for(int i=n-1; i>0; i--) {
+        int loc = i;
+        for(int j=i; j>=0; j--) {
+            if(arr[j] == i) {
+                loc = j;
+                break;
+            }
+        }
+        int rot = i - loc;
+        rotate(arr.begin(), arr.begin() + loc + 1, arr.begin() + i + 1);
+        ans[i] = (i - rot + 1) % (i + 1);
+    }
+    for(int i=0; i<n; i++) cout<<ans[i]<<" \n"[i == n - 1];
 }
 
 int main() {

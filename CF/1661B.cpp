@@ -24,8 +24,30 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+int getMin(int x) {
+    if(x == 0) return 0;
+    int ans = 15;
 
+    for(int i=0; i<=15; i++) {
+        int n = x + i;
+        int j = 0;
+        while(n > 0 && n % 2 == 0) {
+            n >>= 1;
+            j++;
+        }
+        ans = min(ans, i + (15 - j));
+    }
+
+    return ans;
+}
+
+inline void prog() {
+    int n, tmp;
+    cin>>n;
+    for(int i=0; i<n; i++) {
+        cin>>tmp;
+        cout<<getMin(tmp)<<" \n"[i == n - 1];
+    }
 }
 
 int main() {
@@ -37,7 +59,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

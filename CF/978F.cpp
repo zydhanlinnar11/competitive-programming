@@ -14,8 +14,6 @@ typedef vector<vi> vi2d;
 typedef pair<ll, ll> pll;
 typedef vector<ll> vll;
 typedef vector<vll> vll2d;
-typedef vector<string> vs;
-typedef vector<vs> vs2d;
 time_point<system_clock> chrono_time_start, chrono_time_end;
 typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update> pbds;
 #define MOD 1000000007
@@ -25,7 +23,28 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    int n, k;
+    cin>>n>>k;
+    vi arr(n), sorted(n), nLowerQuarrel(n, 0);
+    for(int i=0; i<n;i++) {
+        cin>>arr[i];
+        sorted[i] = arr[i];
+    }
+    sort(sorted.begin(), sorted.end());
 
+    for(int i=0; i<k; i++) {
+        int u, v;
+        cin>>u>>v;
+        u--, v--;
+        if(arr[u] < arr[v]) nLowerQuarrel[v]++;
+        if(arr[v] < arr[u]) nLowerQuarrel[u]++;
+    }
+    
+    for(int i=0; i<n; i++) {
+        auto cntLower = (int)(lower_bound(sorted.begin(), sorted.end(), arr[i]) - sorted.begin());
+        cout<<cntLower - nLowerQuarrel[i];
+        cout<<" \n"[i == n - 1];
+    }
 }
 
 int main() {
@@ -37,7 +56,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

@@ -25,7 +25,32 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    ll n, k;
+    cin>>n>>k;
+    vi arr(n);
+    vi bitCnt(32, 0);
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+        for(unsigned j=0; j<bitCnt.size(); j++, (arr[i] >>= 1)) {
+            if(arr[i] % 2 == 0) continue;
+            bitCnt[j]++;
+        }
+    }
 
+    string nyala;
+
+    while(nyala.length() != bitCnt.size()) nyala.push_back('0'); 
+
+    ll ans = 0;
+    for(int i=30; i>=0; i--) {
+        int krg = (n - bitCnt[i]);
+        if(k < krg) continue;
+        nyala[i] = '1';
+        k -= krg;
+        ans |= ((ll)1 << (ll)i);
+    }
+    // cout<<nyala<<"\n";
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +58,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

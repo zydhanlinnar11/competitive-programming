@@ -25,7 +25,15 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    ll n, m;
+    cin>>n>>m;
 
+    if ((n == 1 && m > 2) || (m == 1 && n > 2)) {
+        cout<<"-1\n";
+        return;
+    }
+
+    cout<<(n + m - 2) + ((max(n, m) - min(n, m)) / 2) * 2<<"\n";
 }
 
 int main() {
@@ -33,8 +41,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1668/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1668/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

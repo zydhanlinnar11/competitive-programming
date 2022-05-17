@@ -25,7 +25,28 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    string s;
+    cin>>s;
+    vi sc(2, 0);
+    
+    for(unsigned i=0; i<s.length(); i++) {
+        sc[0] += s[i] == '0';
+    }
+    int l=0, r=(int)s.length()-1;
 
+    for(unsigned i=0; i<s.length(); i++) {
+        if(s[l] == '0') {
+            l++;
+            sc[0]--;
+            continue;
+        }
+        if(s[r] == '0') {
+            r--;
+            sc[0]--;
+            continue;
+        }
+    }
+    cout<<max(sc[0], sc[1])<<"\n";
 }
 
 int main() {
@@ -33,8 +54,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1680/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1680/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

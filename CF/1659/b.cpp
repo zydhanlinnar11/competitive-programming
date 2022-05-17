@@ -24,8 +24,44 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline char flip (char x) {
+    return (x == '1' ? '0' : '1');
+}
 
+inline void prog() {
+    int n, k;
+    cin>>n>>k;
+    string bs;
+    cin>>bs;
+    vi ans(n, k);
+    bool isOdd = k & 1;
+    int kOri = k;
+    for(int i=0; i<n && k; i++) {
+        int num = bs[i] - '0';
+        if ((isOdd && num == 0) || (!isOdd && num == 1)) continue;
+        ans[i]--;
+        k--;
+    }
+    if(k & 1) {
+        for(int i=n-1; i>=0; i--) {
+            int num = bs[i] - '0';
+            int isOdd2 = ans[i] & 1;
+            if ((!isOdd2 && num == 0) || (isOdd2 && num == 1)) continue;
+            ans[i]--;
+            k--;
+            break;
+        }
+    }
+    for(int i=0; i<n; i++) {
+        if(ans[i] % 2 == 0) continue;
+        bs[i] = flip(bs[i]);
+    }
+
+    cout<<bs<<"\n";
+    for(int i=0; i<n; i++) {
+        if (i == n - 1) ans[i] -= k;
+        cout<<kOri - ans[i]<<" \n"[i == n - 1];
+    }
 }
 
 int main() {
@@ -33,8 +69,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1659/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1659/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

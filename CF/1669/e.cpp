@@ -17,7 +17,7 @@ typedef vector<vll> vll2d;
 typedef vector<string> vs;
 typedef vector<vs> vs2d;
 time_point<system_clock> chrono_time_start, chrono_time_end;
-typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update> pbds;
+typedef tree<char, null_type,less_equal<char>, rb_tree_tag,tree_order_statistics_node_update> pbds;
 #define MOD 1000000007
 
 inline ll modmul(ll a, ll b, ll mod = MOD) {
@@ -25,7 +25,32 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n;
+    cin>>n;
+    map<int, pbds> s1, s2;
+    map<int, map<char, int>> l1, l2;
+    for(int i=0; i<n; i++) {
+        string s;
+        cin>>s;
+        l1[s[0] - 'a'][s[1]]++;
+        s1[s[0] - 'a'].insert(s[1]);
+        l2[s[1] - 'a'][s[0]]++;
+        s2[s[1] - 'a'].insert(s[0]);
+    }
+    ll ans = 0;
+    for(auto &i: l1) {
+        for(auto j: i.second) {
+            ll tmp = s1[i.first].order_of_key(j.first) * j.second;
+            ans += tmp;
+        }
+    }
+    for(auto &i: l2) {
+        for(auto j: i.second) {
+            ll tmp = s2[i.first].order_of_key(j.first) * j.second;
+            ans += tmp;
+        }
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +58,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

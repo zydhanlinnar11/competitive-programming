@@ -24,8 +24,33 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline void swap(char&a, char&b) {
+    char tmp = a;
+    a = b;
+    b = tmp;
+}
 
+inline void fall(vs &grid, int x, int height) {
+    for(int i=height-1; i>=0; i--) {
+        if(grid[i][x] != '*') continue;
+
+        for(int j=i+1; j<height; j++) {
+            if(grid[j][x] != '.') break;;
+            swap(grid[j-1][x], grid[j][x]);
+        }
+    }
+}
+
+inline void prog() {
+    int n, m;
+    cin>>n>>m;
+    vs grid(n, string());
+
+    for(auto &i: grid) cin>>i;
+    
+    for(int i=0; i<m; i++) fall(grid, i, n);
+
+    for(auto i: grid) cout<<i<<"\n";
 }
 
 int main() {
@@ -33,8 +58,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1669/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

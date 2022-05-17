@@ -25,7 +25,20 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, k;
+    cin>>n>>k;
+    vi arr(n);
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
+    sort(arr.begin(), arr.end());
+    int ans = 0;
+    for(int i=n-k*2; i<n-k; i++) {
+        ans += arr[i]/arr[i+k];
+    }
+    for(int i=0; i<n-k*2; i++)
+        ans += arr[i];
+    cout<<ans<<"\n";
 }
 
 int main() {
