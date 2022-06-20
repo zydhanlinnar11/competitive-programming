@@ -25,7 +25,20 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, m; cin>>n>>m;
+    vi2d arr(n, vi(m));
+    pii mx = {0, 0};
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++) {
+            cin>>arr[i][j];
+            if(arr[i][j] > arr[mx.first][mx.second])
+                mx = {i, j};
+        }
+    }
+    if(mx.first >= n / 2) mx.first = n - mx.first - 1;
+    if(mx.second >= m / 2) mx.second = m - mx.second - 1;
+    int w = m - mx.second, h = n - mx.first;
+    cout<<w * h<<"\n";
 }
 
 int main() {
@@ -33,8 +46,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1695/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1695/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

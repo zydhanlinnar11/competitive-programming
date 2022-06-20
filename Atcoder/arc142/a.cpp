@@ -25,7 +25,22 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    string s_n; cin>>s_n;
+    ll n = stol(s_n);
+    string s_k; cin>>s_k;
+    string s_k_rev(s_k.length(), '0');
+    reverse_copy(s_k.begin(), s_k.end(), s_k_rev.begin());
+    ll k = stol(s_k), k_rev = stol(s_k_rev);
+    if(s_k.back() == '0' || k > k_rev || n < k) {
+        cout<<"0\n";
+        return;
+    }
+    ll ans = 0;
+    for(unsigned i=0; i<=s_n.length() - s_k.length(); i++) {
+        ans += stol(s_k + string(i, '0')) <= n;
+        if(s_k_rev != s_k) ans += stol(s_k_rev + string(i, '0')) <= n;
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,11 +48,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/arc142/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/arc142/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

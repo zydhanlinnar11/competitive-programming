@@ -24,8 +24,42 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+int find(vi &par, int u) {
+    if(par[u] == u) return u;
+    return par[u] = find(par, par[u]);
+}
 
+void join(vi &par, int u, int v) { par[find(par, u)] = par[find(par, v)]; }
+
+inline void prog() {
+    int n, m1, m2;
+    cin>>n>>m1>>m2;
+    vi par1(n), par2(n);
+    iota(par1.begin(), par1.end(), 0);
+    iota(par2.begin(), par2.end(), 0);
+    for(int i=0; i<m1; i++) {
+        int u, v; cin>>u>>v; u--, v--;
+        join(par1, u, v);
+    }
+    for(int i=0; i<m2; i++) {
+        int u, v; cin>>u>>v; u--, v--;
+        join(par2, u, v);
+    }
+    vector<pii> ans;
+    for(int i=0; i<n; i++) {
+        for(int j=i+1; j<n; j++) {
+            int parU1 = find(par1, i);
+            int parV1 = find(par1, j);
+            int parU2 = find(par2, i);
+            int parV2 = find(par2, j);
+            if(parU1 == parV1 || parU2 == parV2) continue;
+            join(par1, i, j);
+            join(par2, i, j);
+            ans.push_back({i + 1, j + 1});
+        }
+    }
+    cout<<ans.size()<<"\n";
+    for(auto &i: ans) cout<<i.first<<" "<<i.second<<"\n";
 }
 
 int main() {
@@ -37,7 +71,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

@@ -25,7 +25,18 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, m; cin>>n>>m;
+    string s; cin>>s;
+    map<char, vi> indicesMapper;
+    for(int i=0; i<n; i++) indicesMapper[s[i]].push_back(i);
+    while(m--) {
+        char x, y; cin>>x>>y;
+        swap(indicesMapper[x], indicesMapper[y]);
+    }
+    for(auto &indices: indicesMapper)
+        for(auto &index: indices.second)
+            s[index] = indices.first;
+    cout<<s<<"\n";
 }
 
 int main() {
@@ -37,7 +48,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

@@ -25,16 +25,33 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    vi pal = {0, 70, 140, 210, 280, 350, 601, 671, 741, 811, 881, 951, 1202, 1272, 1342, 1412};
+    set<int> visited;
+    int h, m;
+    scanf("%d:%d", &h, &m);
+    int start = h * 60 + m;
+    int interval;
+    cin>>interval;
+    while(true) {
+        start += interval;
+        start %= 60 * 24;
+        if(visited.find(start) != visited.end()) break;
+        visited.insert(start);
+    }
+    int ans = 0;
+    for(auto i: pal) {
+        ans += (visited.find(i) != visited.end());
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
     chrono_time_start = system_clock::now();
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

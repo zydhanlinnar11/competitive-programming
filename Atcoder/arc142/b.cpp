@@ -25,7 +25,27 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, cnt = 1;
+    cin>>n;
+    if(n == 2) {
+        cout<<"1 2\n3 4\n"; return;
+    }
+    int arr[n][n];
+    for(int i=0; i<n; i++) {
+        for(int j=(i & 1 ? 1:0); j<n; j += 2) {
+            arr[i][j] = cnt++;
+        }
+    }
+    for(int i=0; i<n; i++) {
+        for(int j=(i & 1 ? 0:1); j<n; j += 2) {
+            arr[i][j] = cnt++;
+        }
+    }
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n; j++) {
+            cout<<arr[i][j]<<" \n"[j == n - 1];
+        }
+    }
 }
 
 int main() {
@@ -33,11 +53,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/arc142/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/arc142/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

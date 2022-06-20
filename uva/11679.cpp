@@ -25,7 +25,24 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int b, n;
+    cin>>b>>n;
+    if(b == 0 && n == 0) exit(0);
+    vi ass(b, 0);
+    for(int i=0; i<b; i++) cin>>ass[i];
+    for(int i=0; i<n; i++) {
+        int d, c, v;
+        cin>>d>>c>>v;
+        d--, c--;
+        ass[d] -= v;
+        ass[c] += v;
+    }
+    for(int i=0; i<b; i++) 
+        if(ass[i] < 0) {
+            cout<<"N\n";
+            return;
+        }
+    cout<<"S\n";
 }
 
 int main() {
@@ -33,12 +50,12 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/uva/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/uva/out", "w", stdout);
     #endif
-    int t = 1;
-    cin>>t;
-    while(t--) prog();
+    // int t = 1;
+    // cin>>t;
+    while(true) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;
     // cout<<"Time elapsed: "<<setprecision(3)<<fixed<<elapsed.count() * 1000<<" ms.\n";

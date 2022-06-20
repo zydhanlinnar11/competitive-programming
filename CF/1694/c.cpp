@@ -25,7 +25,22 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n; cin>>n;
+    vll a(n); for(ll &i: a) cin>>i;
+    auto sum = accumulate(a.begin(), a.end(), 0LL);
+    bool can = (sum == 0);
+    vll b(n); b[0] = a[0]; 
+    for(int i=1; i<n; i++) {
+        ll ci = b[i - 1];
+        b[i] = a[i] + ci;
+        if((b[i] != 0 || ci != 0) && ci <= 0) can = false;
+    }
+    #ifdef ZYD_WSL
+        for(auto &i: b) cerr<<i<<" ";
+        cerr<<"\n";
+    #endif
+    vs ans = {"No", "Yes"};
+    cout<<ans[can]<<"\n";
 }
 
 int main() {
@@ -33,8 +48,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1694/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1694/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

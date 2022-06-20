@@ -23,9 +23,28 @@ typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_up
 inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
+set<int> all_cards;
+
+inline int ub(int num) {
+    auto res = all_cards.upper_bound(num);
+    return res == all_cards.end() ? -1 : * res;
+}
 
 inline void prog() {
-
+    vi cards(5);
+    for(int &card: cards) cin>>card;
+    if(*min_element(cards.begin(), cards.end()) ==
+        *max_element(cards.begin(), cards.end()))
+        exit(0);
+    sort(cards.begin(), cards.begin() + 3);
+    sort(cards.begin() + 3, cards.end());
+    for(int i=1; i<=52; i++) all_cards.insert(i);
+    for(int &card: cards) all_cards.erase(card);
+    if(cards[3] > cards[2]) cout<<*all_cards.begin()<<"\n";
+    else if(cards[4] > cards[2] && cards[3] > cards[1]) cout<<ub(cards[1])<<"\n";
+    else if(cards[4] > cards[2]) cout<<ub(cards[2])<<"\n";
+    else if(cards[3] > cards[1]) cout<<ub(cards[1])<<"\n";
+    else cout<<"-1\n";
 }
 
 int main() {
@@ -33,12 +52,12 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/uva/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/uva/out", "w", stdout);
     #endif
-    int t = 1;
-    cin>>t;
-    while(t--) prog();
+    // int t = 1;
+    // cin>>t;
+    while(true) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;
     // cout<<"Time elapsed: "<<setprecision(3)<<fixed<<elapsed.count() * 1000<<" ms.\n";

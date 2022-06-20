@@ -25,7 +25,19 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    string pass; cin>>pass;
+    int n; cin>>n;
+    vs arr(n);
+    for(auto &i: arr) cin>>i;
+    for(auto i: arr) {
+        for(auto j: arr) {
+            if(i == pass || (string("") + i[1] + j[0] == pass) || (string("") + j[1] + i[0] == pass)) {
+                cout<<"YES\n";
+                return;
+            }
+        }
+    }
+    cout<<"NO\n";
 }
 
 int main() {
@@ -37,7 +49,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

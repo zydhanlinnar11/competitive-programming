@@ -25,7 +25,17 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n; cin>>n;
+    vi arr(n);
+    int mn_idx = 0; 
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+        if(arr[i] < arr[mn_idx]) mn_idx = i;
+    }
+    if(n & 1) cout<<"Mike\n";
+    else {
+        cout<<(mn_idx % 2 == 0 ? "Joe\n": "Mike\n");
+    }
 }
 
 int main() {
@@ -33,8 +43,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1695/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1695/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

@@ -24,8 +24,39 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline vi outshuffle(vi arr) {
+    int n = arr.size();
+    vi ret(n);
+    for(int i=0; i<n-1; i++) {
+        ret[i] = arr[i / 2 + (i & 1 ? (n + 1) / 2 : 0)];
+    }
+    ret[n - 1] = n & 1 ? arr[(n - 1) / 2] : arr.back();
+    return ret;
+}
 
+inline vi inshuffle(vi arr) {
+    int n = arr.size();
+    vi ret(n);
+    for(int i=0; i<n-1; i++) {
+        ret[i] = arr[i / 2 + (i & 1 ? 0 : n / 2)];
+    }
+    ret[n - 1] = n & 1 ? arr.back() : arr[(n - 1) / 2];
+    return ret;
+}
+
+inline void prog() {
+    int n, cnt = 0; string s;
+    cin>>n>>s;
+    vi arr(n);
+    for(int i=0; i<n; i++) arr[i] = i;
+    auto func = outshuffle;
+    vi res = arr;
+    while(true) {
+        res = func(res);
+        cnt++;
+        if(res == arr) break;
+    }
+    cout<<cnt<<"\n";
 }
 
 int main() {
@@ -33,11 +64,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/kattis/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/kattis/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

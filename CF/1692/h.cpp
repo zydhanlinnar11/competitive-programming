@@ -24,8 +24,35 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline int getProfit(set<pii> &st, int l, int r) {
+    int round = r - l + 1;
+    return 2*st.rbegin()->first - round; 
+}
 
+inline void prog() {
+    int n; cin>>n;
+    vi arr(n);
+    map<int, vi> indicesByVal;
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+        indicesByVal[arr[i]].push_back(i);
+    }
+    pair<pii, int> ans = {{0, 0}, 1};
+    for(auto &[val, indices]: indicesByVal) {
+        int loc_max = 1;
+        int l = indices.front();
+        for(int i=1; i<(int)indices.size(); i++) {
+            loc_max = loc_max + 2 - (indices[i] - indices[i - 1]);
+            if(ans.second < loc_max) {
+                ans = {{l, indices[i]}, loc_max};
+            } else if(loc_max <= 0) {
+                loc_max = 1;
+                l = indices[i];
+            }
+        }
+    }
+    auto &[l, r] = ans.first;
+    cout<<arr[l]<<" "<<l + 1<<" "<<r + 1<<"\n";
 }
 
 int main() {
@@ -33,8 +60,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

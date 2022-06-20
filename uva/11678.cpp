@@ -25,7 +25,15 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int a, b, inp;
+    cin>>a>>b;
+    if(a == b && a == 0) exit(0);
+    set<int> aa, bb, cc;
+    for(int i=0; i<a; i++) { cin>>inp; aa.insert(inp); }
+    for(int i=0; i<b; i++) { cin>>inp; bb.insert(inp); }
+    for(int i: aa) { if(bb.find(i) != bb.end()) cc.insert(i); }
+    for(int i: bb) { if(aa.find(i) != aa.end()) cc.insert(i); }
+    cout<<min(aa.size(), bb.size()) - cc.size()<<"\n";
 }
 
 int main() {
@@ -33,12 +41,12 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/uva/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/uva/out", "w", stdout);
     #endif
-    int t = 1;
-    cin>>t;
-    while(t--) prog();
+    // int t = 1;
+    // cin>>t;
+    while(true) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;
     // cout<<"Time elapsed: "<<setprecision(3)<<fixed<<elapsed.count() * 1000<<" ms.\n";

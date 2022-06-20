@@ -25,7 +25,30 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, k; cin>>n>>k;
+    vll arr(n);
+    deque<int> dq;
+    set<int> idx;
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
+    for(int i=0; i<k+1; i++) {
+        if(!dq.empty() && arr[dq.back()] >= arr[i] * 2)
+            idx.insert(dq.back());
+        dq.push_back(i);
+    }
+    int ans = 0;
+    for(int i=k+1; i<n; i++) {
+        if(idx.empty()) ans++;
+        if(arr[dq.back()] >= arr[i] * 2)
+            idx.insert(dq.back());
+        dq.push_back(i);
+        auto pos = idx.find(dq.front());
+        dq.pop_front();
+        if(pos != idx.end()) idx.erase(pos);
+    }
+    if(idx.empty()) ans++;
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +56,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

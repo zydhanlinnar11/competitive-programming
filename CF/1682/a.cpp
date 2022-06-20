@@ -25,7 +25,15 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, ans = 0;
+    cin>>n;
+    string s;
+    cin>>s;
+    char m = s[n / 2];
+    for(int i=n / 2 + 1; i<n && s[i] == m; i++)
+        ans++;
+    for(int i=n/2; i>=0 && s[i] == m; i--) ans++;
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +41,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1682/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1682/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

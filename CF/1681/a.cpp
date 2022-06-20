@@ -25,7 +25,17 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n[2];
+    vs players = {"Alice", "Bob"};
+    vi2d arr(2);
+    for(int i=0; i<2; i++) {
+        cin>>n[i];
+        arr[i].resize(n[i]);
+        for(int &j: arr[i]) cin>>j;
+        sort(arr[i].begin(), arr[i].end());
+    }
+    cout<<players[arr[0].back() < arr[1].back()]<<"\n";
+    cout<<players[arr[1].back() >= arr[0].back()]<<"\n";
 }
 
 int main() {
@@ -33,8 +43,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1681/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1681/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

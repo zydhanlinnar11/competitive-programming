@@ -25,7 +25,38 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n;
+    cin>>n;
+    vi arr(n);
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
+    sort(arr.begin(), arr.end());
+    queue<int> q;
+    for(int i=0; i<n; i++) q.push(arr[i]);
+    vi aa, bb;
+    while(!q.empty()) {
+        if ((aa.empty() || aa.back() < q.front()) && aa.size() <= bb.size()) {
+            aa.push_back(q.front());
+        } else if(bb.empty() || bb.back() < q.front()) {
+            bb.push_back(q.front());
+        }
+        q.pop();
+    }
+    int ans = min(aa.size(), bb.size());
+    for(unsigned i=0; i<aa.size(); i++) {
+        auto it = (unsigned)(lower_bound(bb.begin(), bb.end(), aa[i]) - bb.begin());
+        if(it >= bb.size() || bb[it] != aa[i]) {
+            ans = max(ans, (int)min(aa.size(), bb.size() + 1));
+        }
+    }
+    for(unsigned i=0; i<bb.size(); i++) {
+        auto it = (unsigned)(lower_bound(aa.begin(), aa.end(), bb[i]) - aa.begin());
+        if(it >= aa.size() || aa[it] != bb[i]) {
+            ans = max(ans, (int)min(bb.size(), bb.size() + 1));
+        }
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -33,8 +64,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1682/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1682/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

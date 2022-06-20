@@ -25,7 +25,33 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n; cin>>n;
+    vi arr(n); multiset<int> ms;
+    for(auto &i: arr) {
+        cin>>i;
+        i = i % 10;
+        ms.insert(i);
+    }
+    for(int i=0; i<10; i++) {
+        auto ii = ms.find(i);
+        if(ii == ms.end()) continue;
+        ms.erase(ii);
+        for(int j=0; j<10; j++) {
+            auto jj = ms.find(j);
+            if(jj == ms.end()) continue;
+            ms.erase(jj);
+            for(int k=0; k<10; k++) {
+                auto kk = ms.find(k);
+                if(kk == ms.end()) continue;
+                if((i + j + k) % 10 != 3) continue;
+                cout<<"YES\n";
+                return;
+            }
+            ms.insert(j);
+        }
+        ms.insert(i);
+    }
+    cout<<"NO\n";
 }
 
 int main() {
@@ -33,8 +59,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1692/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

@@ -25,7 +25,9 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    ll n;
+    cin>>n;
+    cout<<1 + (4LL * n / __gcd(n+1, 4LL * n))<<"\n";
 }
 
 int main() {
