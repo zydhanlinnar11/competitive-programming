@@ -26,8 +26,37 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline vi count(vi2d &res, vi &counted, vi2d &children, int n) {
+    if(counted.at(n)) return res.at(n);
+    vi &ans = res.at(n);
+    for(int child: children.at(n)) {
+        auto childRes = count(res, counted, children, child);
+        ans.at(0) += childRes.at(0);
+        ans.at(1) += childRes.at(1);
+    }
+    counted.at(n) = true;
+    return ans;
+}
 
+inline void prog() {
+    int n; cin>>n;
+    vi par(n + 1);
+    vi2d children(n + 1);
+    vi counted(n + 1, false);
+    // 0 = black, 1 = white
+    vi2d res(n + 1, {0, 0});
+    for(int i=2; i<=n; i++) {
+        cin>>par[i];
+        children[par[i]].push_back(i);
+    }
+    string s; cin>>s;
+    int ans = 0;
+    for(int i=1; i<=n; i++) res[i][s[i - 1] == 'W']++;
+    for(int i=1; i<=n; i++) {
+        auto cnt = count(res, counted, children, i);
+        ans += (cnt.at(0) == cnt.at(1));
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {

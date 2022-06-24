@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+#include <iomanip>
 using namespace __gnu_pbds;
 #define mp(x, y) make_pair(x, y)
 using namespace std;
@@ -27,7 +28,32 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    string s, n; cin>>s>>n;
+    ll expected = 0;
+    for(auto i: s) if(i == '+') expected++; else expected--;
+    multiset<int> possibilities;
+    for(int i=0; i<(1 << s.length()); i++) {
+        string bits;
+        int cpy = i;
+        while(bits.length() != s.length()) {
+            auto bit = cpy % 2;
+            cpy >>= 1;
+            bits.push_back(bit == 1 ? '+' : '-');
+        }
+        bool can = true;
+        for(unsigned j=0; j<n.length(); j++) {
+            if(n[j] != '?' && n[j] != bits[j]) {
+                can = false;
+                break;
+            }
+        }
+        if(can) {
+            int res = 0;
+            for(auto bit: bits) if(bit == '+') res++; else res--;
+            possibilities.insert(res);
+        }
+    }
+    cout<<setprecision(9)<<fixed<<(double)possibilities.count(expected) / possibilities.size()<<"\n";
 }
 
 int main() {
@@ -39,7 +65,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

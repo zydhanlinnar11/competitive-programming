@@ -27,7 +27,19 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n, m; cin>>n>>m;
+    vi arr(n), c(m);
+    for(auto &i: arr) cin>>i;
+    for(auto &i: c) cin>>i;
+    sort(arr.rbegin(), arr.rend());
+    int curr = 0;
+    ll ans = 0;
+    for(int i: arr) {
+        i--;
+        if(curr < i) ans += c[curr++];
+        else ans += c[i];
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {

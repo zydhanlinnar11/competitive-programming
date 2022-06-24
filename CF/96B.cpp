@@ -27,7 +27,38 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int n; cin>>n;
+    vl arr;
+    for(int i=0; i<(1 << 11); i++) {
+        string str_rep;
+        auto cpy = i;
+        int cnt4 = 0;
+        do {
+            str_rep.push_back((cpy & 1 ? '4' : '7'));
+            if(cpy & 1) cnt4++;
+            cpy >>= 1;
+        } while(cpy);
+        auto num = stoll(str_rep);
+        if(num >= n && (str_rep.length() % 2) == 0 && (cnt4 == (int)str_rep.length() / 2)) {
+            arr.push_back(num);
+        }
+    }
+    for(int i=0; i<(1 << 11); i++) {
+        string str_rep;
+        auto cpy = i;
+        int cnt4 = 0;
+        do {
+            str_rep.push_back((cpy & 1 ? '7' : '4'));
+            if(cpy & 1) cnt4++;
+            cpy >>= 1;
+        } while(cpy);
+        auto num = stoll(str_rep);
+        if(num >= n && (str_rep.length() % 2) == 0 && (cnt4 == (int)str_rep.length() / 2)) {
+            arr.push_back(num);
+        }
+    }
+    sort(arr.begin(), arr.end());
+    cout<<arr.front()<<"\n";
 }
 
 int main() {
@@ -39,7 +70,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

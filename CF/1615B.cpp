@@ -26,8 +26,24 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-inline void prog() {
+inline string toBinary32Bit(int n) {
+    string res;
+    while(n) {
+        res.push_back('0' + (n % 2));
+        n >>= 1;
+    }
+    return res + string(32U - res.length(), '0');
+}
 
+inline void prog(vi2d &prefSum) {
+    int l, r;
+    cin>>l>>r;
+    int ans = r - l + 1;
+    for(int i=0; i<32; i++) {
+        auto zeroCount = prefSum.at(r).at(i) - prefSum.at(l - 1).at(i);
+        ans = min(ans, zeroCount);
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -38,9 +54,21 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
+    vs bits;
+    vi2d prefSum(2e5+1, vi(32, 0));
+    for(int i=0; i<=2e5; i++)
+        bits.push_back(toBinary32Bit(i));
+    
+    for(int i=0; i<32; i++) {
+        int zeroCount = 0;
+        for(unsigned j=0; j<bits.size(); j++) {
+            zeroCount += (bits[j][i] == '0');
+            prefSum.at(j).at(i) = zeroCount;
+        }
+    }
     int t = 1;
     cin>>t;
-    while(t--) prog();
+    while(t--) prog(prefSum);
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;
     // cout<<"Time elapsed: "<<setprecision(3)<<fixed<<elapsed.count() * 1000<<" ms.\n";
