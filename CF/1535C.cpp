@@ -26,32 +26,24 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-
 inline void prog() {
-    int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
-    for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
+    string s; cin>>s;
+    int n = s.length();
+    ll ans = 0;
+    vl2d dp(n + 1, vl(2, 0));
+    for(int i=1; i<=n; i++) {
+        auto &c = s[i - 1];
+        if(c != '?') {
+            auto complement = '1' - c;
+            dp[i][complement] = 0;
+            dp[i][c - '0'] = dp[i - 1][complement] + 1;
+        } else {
+            dp[i][1] = dp[i - 1][0] + 1;
+            dp[i][0] = dp[i - 1][1] + 1;
         }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+        ans += max(dp[i][0], dp[i][1]);
     }
-    cout<<taken<<"\n";
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -63,7 +55,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

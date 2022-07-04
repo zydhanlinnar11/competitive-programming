@@ -26,32 +26,40 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-
 inline void prog() {
-    int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
+    int n;
+    cin>>n;
+    string s, t;
+    cin>>s>>t;
+    vector<set<int>> idx(3);
     for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
-        }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+        idx[s[i] - 'a'].insert(i);
     }
-    cout<<taken<<"\n";
+    for(int i=0; i<n - 1; i++) {
+        if(s[i] == t[i]) continue;
+        if(s[i] != t[i] - 1) {
+            cout<<"NO\n";
+            return;
+        }
+        auto next = idx[s[i] - 'a' + 1].lower_bound(i + 1);
+        if(next == idx[s[i] - 'a' + 1].end()) {
+            cout<<"NO\n";
+            return;
+        }
+        auto nextVal = *next;
+        auto exclude = (s[i] - 'a' + 2) % 3;
+        bool exist = idx[exclude].lower_bound(i + 1) != idx[exclude].upper_bound(nextVal - 1);
+        if(exist) {
+            cout<<"NO\n";
+            return;
+        }
+        idx[s[i] - 'a'].erase(i);
+        idx[s[i] - 'a'].insert(nextVal);
+        idx[s[i] - 'a' + 1].erase(nextVal);
+        idx[s[i] - 'a' + 1].insert(i);
+        swap(s[i], s[nextVal]);
+    }
+    cout<<(s == t ? "YES\n" : "NO\n");
 }
 
 int main() {
@@ -63,7 +71,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

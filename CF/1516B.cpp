@@ -26,32 +26,24 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-
 inline void prog() {
     int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
-    for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
-        }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+    vi arr(n + 1, 0);
+    for(int i=1; i<=n; i++) {
+        cin>>arr[i];
+        arr[i] ^= arr[i - 1];
     }
-    cout<<taken<<"\n";
+    for(int i=1; i<n; i++) {
+        for(int j=i; j<n; j++) {
+            if((arr[i] == (arr[j] ^ arr[i])
+            && arr[i] == (arr[n] ^ arr[j]))
+            || arr[i] == (arr[n] ^ arr[i])) {
+                cout<<"YES\n";
+                return;
+            }
+        }
+    }
+    cout<<"NO\n";
 }
 
 int main() {
@@ -63,7 +55,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

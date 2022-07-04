@@ -26,44 +26,48 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
+vl fact(2e5+5);
+
+inline ll modPow(ll a, ll b) {
+    if(b == 0 || a == 1) return 1;
+    if(a == 0) return 0;
+    if(b == 1) return a % MOD;
+    if(b & 1) {
+        return modmul(modPow(a, b - 1), modPow(a, 1));
+    }
+    auto half = modPow(a, b >> 1);
+    return modmul(half, half);
+}
 
 inline void prog() {
     int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
+    vi arr(n);
+    int nd = INT_MAX;
     for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
-        }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+        cin>>arr[i];
+        nd &= arr[i];
     }
-    cout<<taken<<"\n";
+    int cnt = count(arr.begin(), arr.end(), nd);
+    if(cnt < 2) {
+        cout<<"0\n";
+        return;
+    }
+    cout<<modmul(modmul(fact[cnt], fact[n - 2]), modPow(fact[cnt - 2], MOD - 2))<<"\n";
 }
 
 int main() {
     chrono_time_start = system_clock::now();
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    fact[0] = 1;
+    for(int i=1; i<(int)fact.size(); i++)
+        fact[i] = modmul(fact[i - 1], i);
     #ifdef ZYD_WSL
         freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

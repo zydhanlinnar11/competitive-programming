@@ -26,32 +26,32 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-
 inline void prog() {
     int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
+    vl univ(n);
+    vl2d prevSum(n, vl(1, 0));
     for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
-        }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+        cin>>univ[i];
     }
-    cout<<taken<<"\n";
+    for(int i=0; i<n; i++) {
+        int tmp;
+        cin>>tmp;
+        prevSum[univ[i] - 1].push_back(tmp);
+    }
+    vl ans(n, 0);
+    for(int i=0; i<n; i++) {
+        int sz = (int)prevSum[i].size();
+        sort(prevSum[i].rbegin(), prevSum[i].rend() - 1);
+        for(int j=1; j<sz; j++) {
+            prevSum[i][j] += prevSum[i][j - 1];
+        }
+        for(int j=1; j<=min(sz, n); j++) {
+            ans[j - 1] += prevSum[i][((sz - 1) / j) * j];
+        }
+    }
+    for(int i=0; i<n; i++) {
+        cout<<ans[i]<<" \n"[i == n - 1];
+    }
 }
 
 int main() {
@@ -63,7 +63,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

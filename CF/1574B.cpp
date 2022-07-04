@@ -9,9 +9,15 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
-typedef vector<vi> vvi;
 typedef vector<string> vs;
 typedef vector<vi> vi2d;
+typedef pair<ll, ll> pll;
+typedef vector<ll> vl;
+typedef vector<vl> vl2d;
+typedef vector<string> vs;
+typedef vector<vs> vs2d;
+typedef vector<pii> vii;
+typedef vector<pll> vll;
 time_point<system_clock> chrono_time_start, chrono_time_end;
 typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update> pbds;
 #define MOD 1000000007
@@ -21,16 +27,11 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-    int m;
-    vi arr(3);
-    cin>>arr[0]>>arr[1]>>arr[2]>>m;
-    sort(arr.begin(), arr.end());
-    int pake = min(m + 1, arr[0]);
-    m -= pake - 1;
-    arr[0] -= pake;
-    if(m == 0) {
-        
-    }
+    int A[3], m;
+    cin>>A[0]>>A[1]>>A[2]>>m;
+    sort(A, A + 3);
+    if(max(A[2] - A[1] - A[0] - 1, 0) <= m && m <= A[0] + A[1] + A[2] - 3) cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() {
@@ -38,7 +39,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/CP/CF/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

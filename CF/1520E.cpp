@@ -26,32 +26,27 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
 
-
 inline void prog() {
     int n; cin>>n;
-    vl arr(n);
-    for(auto &i: arr) cin>>i;
-    ll taken = 0, health = 0;
-    priority_queue<ll> pq;
-    for(int i=0; i<n; i++) {
-        if(arr[i] >= 0) {
-            taken++;
-            health += arr[i];
-            continue;
-        }
-        bool masuk = arr[i] + health >= 0;
-        if(!masuk && !pq.empty() && arr[i] > -pq.top()) {
-            masuk = true;
-            taken--;
-            health += pq.top();
-            pq.pop();
-        }
-        if(!masuk) continue;
-        pq.push(-arr[i]);
-        health += arr[i];
-        taken++;
+    string s; cin>>s;
+    s = "." + s + ".";
+    vl ps1(n + 2, 0), cnt1(n + 2, 0);
+    for(int i=1; i<(int)ps1.size(); i++) {
+        ps1[i] = ps1[i - 1] + (s[i] == '.' ? cnt1[i - 1] : 0);
+        cnt1[i] = cnt1[i - 1] + (s[i] == '*');
     }
-    cout<<taken<<"\n";
+    vl ps2(n + 2, 0), cnt2(n + 2, 0);
+    for(int i=(int)ps2.size() - 2; i>=0; i--) {
+        ps2[i] = ps2[i + 1] + (s[i] == '.' ? cnt2[i + 1] : 0);
+        cnt2[i] = cnt2[i + 1] + (s[i] == '*');
+    }
+    ll ans = INT64_MAX;
+    for(int i=1; i<(int)s.size() - 1; i++) {
+        ll l = ps1[i - 1], r = ps2[i + 1];
+        ll add = (s[i] == '.' ? min(cnt1[i - 1], cnt2[i + 1]) : 0);
+        ans = min(ans, l + r + add);
+    }
+    cout<<ans<<"\n";
 }
 
 int main() {
@@ -63,7 +58,7 @@ int main() {
         freopen("/home/zydhanlinnar11/cp/CF/out", "w", stdout);
     #endif
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;
