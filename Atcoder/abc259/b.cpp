@@ -27,7 +27,10 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int a, b, d;
+    cin>>a>>b>>d;
+    long double rad = d * M_PI / 180;
+    cout<<setprecision(7)<<fixed<<cosf64x(rad) * a - sinf64x(rad) * b<<" "<<sinf64x(rad) * a + cosf64x(rad) * b<<"\n"; 
 }
 
 int main() {
@@ -35,11 +38,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/Atcoder/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/Atcoder/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc259/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc259/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

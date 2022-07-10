@@ -25,18 +25,35 @@ typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_up
 inline ll modmul(ll a, ll b, ll mod = MOD) {
     return ((a % mod) * (b % mod)) % mod;
 }
+vs arr;
 
 inline void prog() {
-
+    string s;
+    cin>>s;
+    for(int i=0; i<(int)arr.size(); i++) {
+        if(arr[i] == s) {
+            cout<<i + 1<<"\n";
+            return;
+        }
+    }
 }
 
 int main() {
     chrono_time_start = system_clock::now();
     ios_base::sync_with_stdio(false);
+    for(char i='a'; i<='z'; i++) {
+        for(char j='a'; j<='z'; j++) {
+            if(i == j) continue;
+            string x = "";
+            x.push_back(i);
+            x.push_back(j);
+            arr.push_back(x);
+        }
+    }
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/Atcoder/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/Atcoder/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1674/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1674/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;

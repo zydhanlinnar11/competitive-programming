@@ -27,6 +27,44 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
+    string s, t;
+    cin>>s>>t;
+    int n = s.length();
+    int cnt = 1;
+    char tmp = s[0];
+    vector<pair<char, int>> p1, p2;
+    for(int i=1; i<=n; i++) {
+        if(tmp != s[i] || i == n) {
+            p1.push_back({tmp, cnt});
+            tmp = s[i];
+            cnt = 1;
+            continue;
+        }
+        cnt++;
+    }
+    tmp = t[0];
+    for(int i=1; i<=(int)t.length(); i++) {
+        if(tmp != t[i] || i == (int)t.length()) {
+            p2.push_back({tmp, cnt});
+            tmp = t[i];
+            cnt = 1;
+            continue;
+        }
+        cnt++;
+    }
+    if(p1.size() != p2.size()) {
+        cout<<"No\n";
+        return;
+    }
+    for(int i=0; i<(int)p1.size(); i++) {
+        if(p1[i].first != p2[i].first
+            || (p1[i].second == 1 && p1[i].second < p2[i].second)
+            || (p1[i].second > p2[i].second)) {
+                cout<<"No\n";
+                return;
+            }
+    }
+    cout<<"Yes\n";
 
 }
 
@@ -35,11 +73,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/Atcoder/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/Atcoder/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc259/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc259/out", "w", stdout);
     #endif
     int t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--) prog();
     chrono_time_end = system_clock::now();
     duration<double> elapsed = chrono_time_end - chrono_time_start;

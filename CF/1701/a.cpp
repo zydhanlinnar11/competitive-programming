@@ -27,7 +27,12 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    int tmp, sum = 0;
+    for(int i=0; i<4; i++) {
+        cin>>tmp;
+        sum += tmp;
+    }
+    cout<<(sum == 0 ? 0 : sum == 4 ? 2 : 1)<<"\n";
 }
 
 int main() {
@@ -35,8 +40,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/Atcoder/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/Atcoder/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/CF/1701/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/CF/1701/out", "w", stdout);
     #endif
     int t = 1;
     cin>>t;
