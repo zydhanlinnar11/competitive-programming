@@ -2,8 +2,8 @@ from os import WEXITSTATUS, system
 import random
 
 
-bffile = './1697Cbf'
-file = './1697C'
+bffile = './1364Abf'
+file = './1364A'
 inp = './in'
 
 
@@ -17,24 +17,20 @@ def compare():
         print("Accepted")
 
 
-arr = []
 
-
-def generate_tc(n, s):
-    if len(s) == n:
-        arr.append(s)
-        return
-    for i in 'abc':
-        generate_tc(n, s + i)
-
-
-n = 4
-generate_tc(n, '')
-for i in range(0, len(arr)):
-    for j in range(i+1, len(arr)):
+def generate_tc(n, arr):
+    if len(arr) == n:
+        if arr[0] == 0: return
         inp_file = open(inp, 'w')
-        inp_file.write(f'1\n{str(n)}\n{arr[i]}\n{arr[j]}\n')
+        inp_file.write(f'1\n{len(arr) - 1} {arr[0]}\n')
+        for i in range(1, len(arr)):
+            inp_file.write(f'{arr[i]} ')
         inp_file.close()
         compare()
+        return
+    for i in range(0, 6):
+        arr.append(i)
+        generate_tc(n, arr)
+        arr.pop()
 
-# print(arr)
+generate_tc(5, [])
