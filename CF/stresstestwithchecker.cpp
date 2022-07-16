@@ -29,7 +29,11 @@ inline void check(vl &arr) {
     }
     if(ans.size() == 1 && ans[0] == -1) {
         printf("Skipped\n");
-        return;
+        exit(0);
+    }
+    if(ans.size() != arr.size()) {
+        printf("Wrong Answer\n");
+        exit(0);
     }
     set<int> mex;
     for(int i=0; i<100; i++) {
@@ -62,7 +66,7 @@ void generateTC(int n, vl &arr) {
         check(arr);
         return;
     }
-    for (int i=(arr.empty() ? 0 : arr.back()); i<11; i++) {
+    for (int i=(arr.empty() ? 0 : arr.back()); i<=(int)arr.size()+1; i++) {
         arr.push_back(i);
         generateTC(n, arr);
         arr.pop_back();
@@ -70,8 +74,10 @@ void generateTC(int n, vl &arr) {
 }
 
 int main() {
-    int n = 5;
+    int n = 10;
     vl arr;
-    generateTC(n, arr);
+    for(int i=1; i<n; i++) {
+        generateTC(i, arr);
+    }
     return 0;
 }
