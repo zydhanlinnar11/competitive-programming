@@ -18,6 +18,8 @@ typedef vector<string> vs;
 typedef vector<vs> vvs;
 typedef vector<pii> vii;
 typedef vector<pll> vll;
+typedef vector<bool> vb;
+typedef vector<vb> vvb;
 time_point<system_clock> chrono_time_start, chrono_time_end;
 typedef tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update> pbds;
 #define MOD 1000000007
