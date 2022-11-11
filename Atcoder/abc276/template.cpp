@@ -29,7 +29,7 @@ inline ll modmul(ll a, ll b, ll mod = MOD) {
 }
 
 inline void prog() {
-
+    
 }
 
 int main() {
@@ -37,8 +37,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     #ifdef ZYD_WSL
-        freopen("/home/zydhanlinnar11/cp/Atcoder/in", "r", stdin);
-        freopen("/home/zydhanlinnar11/cp/Atcoder/out", "w", stdout);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc276/in", "r", stdin);
+        freopen("/home/zydhanlinnar11/cp/Atcoder/abc276/out", "w", stdout);
     #endif
     int t = 1;
     // cin>>t;
