@@ -11,7 +11,7 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 typedef vector<string> vs;
 typedef vector<vi> vvi;
-typedef pair<ll, ll> pll;
+typedef pair<ll, ll> pll;\
 typedef vector<ll> vl;
 typedef vector<vl> vvl;
 typedef vector<string> vs;
